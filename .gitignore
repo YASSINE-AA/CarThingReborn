@@ -1,2 +1,2 @@
-lib/lvgl
-lib/TFT_eSPI
+lvgl/
+TFT_eSPI/
