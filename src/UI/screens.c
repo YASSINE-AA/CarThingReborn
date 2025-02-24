@@ -25,10 +25,10 @@ void create_screen_main() {
         lv_obj_t *parent_obj = obj;
         {
             // tabview
-            lv_obj_t *obj = lv_tabview_create(parent_obj, LV_DIR_TOP, 60);
+            lv_obj_t *obj = lv_tabview_create(parent_obj, LV_DIR_TOP, 30);
             objects.tabview = obj;
-            lv_obj_set_pos(obj, 0, 0);
-            lv_obj_set_size(obj, 480, 320);
+            lv_obj_set_pos(obj, 0, 26);
+            lv_obj_set_size(obj, 480, 294);
             lv_obj_add_state(obj, LV_STATE_FOCUSED);
             {
                 lv_obj_t *parent_obj = obj;
@@ -125,24 +125,44 @@ void create_screen_main() {
                         lv_obj_t *parent_obj = obj;
                         {
                             lv_obj_t *obj = lv_obj_create(parent_obj);
+                            objects.obj0 = obj;
                             lv_obj_set_pos(obj, 1, -2);
                             lv_obj_set_size(obj, 446, 230);
                             lv_obj_clear_flag(obj, LV_OBJ_FLAG_SCROLLABLE);
+                            lv_obj_set_style_text_color(obj, lv_color_hex(0xff212121), LV_PART_MAIN | LV_STATE_DEFAULT);
                             {
                                 lv_obj_t *parent_obj = obj;
+                                {
+                                    // starting_pos_label
+                                    lv_obj_t *obj = lv_label_create(parent_obj);
+                                    objects.starting_pos_label = obj;
+                                    lv_obj_set_pos(obj, -1, 121);
+                                    lv_obj_set_size(obj, 75, LV_SIZE_CONTENT);
+                                    lv_label_set_text(obj, "start");
+                                    lv_obj_set_style_text_color(obj, lv_color_hex(0xff898989), LV_PART_MAIN | LV_STATE_DEFAULT);
+                                }
+                                {
+                                    // end_pos_label
+                                    lv_obj_t *obj = lv_label_create(parent_obj);
+                                    objects.end_pos_label = obj;
+                                    lv_obj_set_pos(obj, 366, 121);
+                                    lv_obj_set_size(obj, 62, 16);
+                                    lv_label_set_text(obj, "end");
+                                    lv_obj_set_style_text_color(obj, lv_color_hex(0xff898989), LV_PART_MAIN | LV_STATE_DEFAULT);
+                                }
                                 {
                                     // song_title_label
                                     lv_obj_t *obj = lv_label_create(parent_obj);
                                     objects.song_title_label = obj;
-                                    lv_obj_set_pos(obj, 225, 63);
-                                    lv_obj_set_size(obj, 184, 16);
+                                    lv_obj_set_pos(obj, -1, 37);
+                                    lv_obj_set_size(obj, 407, 16);
                                     lv_label_set_text(obj, "Song: Darude Sandstorm");
                                 }
                                 {
                                     // album_title_label
                                     lv_obj_t *obj = lv_label_create(parent_obj);
                                     objects.album_title_label = obj;
-                                    lv_obj_set_pos(obj, 245, 29);
+                                    lv_obj_set_pos(obj, -1, 9);
                                     lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
                                     lv_label_set_text(obj, "Album: John Doe");
                                 }
@@ -150,15 +170,14 @@ void create_screen_main() {
                                     // music_progress_slider
                                     lv_obj_t *obj = lv_slider_create(parent_obj);
                                     objects.music_progress_slider = obj;
-                                    lv_obj_set_pos(obj, 225, 101);
-                                    lv_obj_set_size(obj, 184, 11);
-                                    lv_slider_set_value(obj, 25, LV_ANIM_OFF);
+                                    lv_obj_set_pos(obj, 5, 101);
+                                    lv_obj_set_size(obj, 401, 11);
                                 }
                                 {
                                     // music_back_btn
                                     lv_obj_t *obj = lv_imgbtn_create(parent_obj);
                                     objects.music_back_btn = obj;
-                                    lv_obj_set_pos(obj, 245, 146);
+                                    lv_obj_set_pos(obj, 83, 146);
                                     lv_obj_set_size(obj, LV_SIZE_CONTENT, 32);
                                     lv_imgbtn_set_src(obj, LV_IMGBTN_STATE_RELEASED, NULL, &img_back, NULL);
                                 }
@@ -166,7 +185,7 @@ void create_screen_main() {
                                     // music_pause_btn
                                     lv_obj_t *obj = lv_imgbtn_create(parent_obj);
                                     objects.music_pause_btn = obj;
-                                    lv_obj_set_pos(obj, 301, 146);
+                                    lv_obj_set_pos(obj, 189, 146);
                                     lv_obj_set_size(obj, LV_SIZE_CONTENT, 32);
                                     lv_imgbtn_set_src(obj, LV_IMGBTN_STATE_RELEASED, NULL, &img_pause, NULL);
                                 }
@@ -174,13 +193,77 @@ void create_screen_main() {
                                     // music_skip_button
                                     lv_obj_t *obj = lv_imgbtn_create(parent_obj);
                                     objects.music_skip_button = obj;
-                                    lv_obj_set_pos(obj, 355, 146);
+                                    lv_obj_set_pos(obj, 290, 146);
                                     lv_obj_set_size(obj, LV_SIZE_CONTENT, 32);
                                     lv_imgbtn_set_src(obj, LV_IMGBTN_STATE_RELEASED, NULL, &img_next, NULL);
+                                }
+                                {
+                                    // artist_name_label
+                                    lv_obj_t *obj = lv_label_create(parent_obj);
+                                    objects.artist_name_label = obj;
+                                    lv_obj_set_pos(obj, -1, 62);
+                                    lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+                                    lv_label_set_text(obj, "Artist: John Doe");
+                                }
+                            }
+                        }
+                        {
+                            // bt_connection_msgbox
+                            lv_obj_t *obj = lv_msgbox_create(parent_obj, "", "", 0, true);
+                            objects.bt_connection_msgbox = obj;
+                            lv_obj_set_pos(obj, 126, 21);
+                            lv_obj_set_size(obj, 220, 145);
+                            lv_obj_add_flag(obj, LV_OBJ_FLAG_HIDDEN);
+                            lv_obj_set_style_align(obj, LV_ALIGN_DEFAULT, LV_PART_MAIN | LV_STATE_DEFAULT);
+                            {
+                                lv_obj_t *parent_obj = obj;
+                                {
+                                    lv_obj_t *obj = lv_label_create(parent_obj);
+                                    lv_obj_set_pos(obj, 138, 155);
+                                    lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+                                    lv_label_set_text(obj, "Connected to Bluetooth");
                                 }
                             }
                         }
                     }
+                }
+            }
+        }
+        {
+            lv_obj_t *obj = lv_obj_create(parent_obj);
+            objects.obj1 = obj;
+            lv_obj_set_pos(obj, 0, 0);
+            lv_obj_set_size(obj, 480, 26);
+            lv_obj_set_style_bg_color(obj, lv_color_hex(0xff1976d2), LV_PART_MAIN | LV_STATE_DEFAULT);
+            {
+                lv_obj_t *parent_obj = obj;
+                {
+                    // bt_connected_label
+                    lv_obj_t *obj = lv_label_create(parent_obj);
+                    objects.bt_connected_label = obj;
+                    lv_obj_set_pos(obj, -13, -13);
+                    lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+                    lv_label_set_text(obj, "Disconnected. Please connect your phone.");
+                    lv_obj_set_style_text_color(obj, lv_color_hex(0xffffffff), LV_PART_MAIN | LV_STATE_DEFAULT);
+                }
+            }
+        }
+        {
+            lv_obj_t *obj = lv_obj_create(parent_obj);
+            lv_obj_set_pos(obj, 395, 70);
+            lv_obj_set_size(obj, 68, 229);
+            lv_obj_add_flag(obj, LV_OBJ_FLAG_HIDDEN);
+            lv_obj_clear_flag(obj, LV_OBJ_FLAG_SCROLLABLE);
+            {
+                lv_obj_t *parent_obj = obj;
+                {
+                    // volume_slider
+                    lv_obj_t *obj = lv_slider_create(parent_obj);
+                    objects.volume_slider = obj;
+                    lv_obj_set_pos(obj, 11, 186);
+                    lv_obj_set_size(obj, 181, 12);
+                    lv_slider_set_value(obj, 25, LV_ANIM_OFF);
+                    lv_obj_set_style_transform_angle(obj, -900, LV_PART_MAIN | LV_STATE_DEFAULT);
                 }
             }
         }

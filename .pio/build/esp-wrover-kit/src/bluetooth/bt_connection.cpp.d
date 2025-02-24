@@ -388,8 +388,8 @@
  lib/AudioTools/src/AudioTools/CoreAudio/AudioSource.h \
  lib/AudioTools/src/AudioTools/CoreAudio/AudioEffects/Synthesizer.h \
  lib/AudioTools/src/AudioTools/CoreAudio/AudioActions.h \
- lib/A2DP/src/BluetoothA2DP.h lib/A2DP/src/BluetoothA2DPSource.h \
- lib/A2DP/src/BluetoothA2DPCommon.h lib/A2DP/src/config.h \
+ lib/A2DP/src/BluetoothA2DPSink.h lib/A2DP/src/BluetoothA2DPCommon.h \
+ lib/A2DP/src/config.h \
  /home/yassine-ahmed-ali/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include/freertos/timers.h \
  /home/yassine-ahmed-ali/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/port/xtensa/include/freertos/xtensa_api.h \
  lib/A2DP/src/A2DPVolumeControl.h \
@@ -406,6 +406,5 @@
  /home/yassine-ahmed-ali/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/nvs_flash/include/nvs.h \
  /home/yassine-ahmed-ali/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-bt.h \
  /home/yassine-ahmed-ali/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-log.h \
- lib/A2DP/src/BluetoothA2DPSink.h lib/A2DP/src/BluetoothA2DPOutput.h \
- /home/yassine-ahmed-ali/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_ringbuf/include/freertos/ringbuf.h \
- lib/A2DP/src/BluetoothA2DPSinkQueued.h
+ lib/A2DP/src/BluetoothA2DPOutput.h \
+ /home/yassine-ahmed-ali/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_ringbuf/include/freertos/ringbuf.h

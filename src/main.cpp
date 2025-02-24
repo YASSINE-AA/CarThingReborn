@@ -5,12 +5,8 @@
 #include <TFT_eSPI.h>
 #include <UI/ui.h>
 
-
 // ============= BLUETOOTH ============== //
 #include <bluetooth/bt_connection.hpp>
-
-
-
 
 /*To use the built-in examples and demos of LVGL uncomment the includes below respectively.
  *You also need to copy `lvgl/examples` to `lvgl/src/examples`. Similarly for the demos `lvgl/demos` to `lvgl/src/demos`.
@@ -86,8 +82,7 @@ const char *boot_msgs[] = {
     "Simulating hard work... looking busy.     ",
     "Installing fun... encountered a problem.  ",
     "Awaiting user patience... stuck at 0%.    ",
-    "Pretending to load... looking important.  "
-};
+    "Pretending to load... looking important.  "};
 
 static void switch_to_main(lv_timer_t *timer)
 {
@@ -105,10 +100,28 @@ void setup_screens(void)
     lv_timer_create(switch_to_main, 8000, objects.main);
 }
 
+void hide_bt_connect_msgbox(lv_timer_t *timer)
+{
+    lv_obj_add_flag(objects.bt_connection_msgbox, LV_OBJ_FLAG_HIDDEN);
+}
+
+void show_bt_connect_msgbox()
+{
+    lv_obj_clear_flag(objects.bt_connection_msgbox, LV_OBJ_FLAG_HIDDEN);
+}
+
 void setup()
 {
     Serial.begin(115200); /* prepare for possible serial debug */
-    bt_connection_broadcast();
+    Serial.print("Free Heap Before Bluetooth: ");
+    Serial.println(ESP.getFreeHeap());
+
+    bt_connection_broadcast(); // Initialize Bluetooth
+
+    // lv_label_set_text(objects.song_title_label, );
+
+    Serial.print("Free Heap After Bluetooth: ");
+    Serial.println(ESP.getFreeHeap());
     lv_init();
 
 #if LV_USE_LOG != 0
@@ -161,13 +174,66 @@ void setup()
     //  lv_demo_music();
     //  lv_demo_printer();
     //  lv_demo_stress();
+    lv_tabview_set_act(objects.tabview, 1, LV_ANIM_ON);
+
+    // lv_label_set_text(objects.song_title_label, bluetooth_context->current_metadata.title);
 
     Serial.println("Setup done");
 }
+bool bt_is_init = false;
+
+void format_time_display(char *buff, uint32_t time, size_t buff_size)
+{
+    uint32_t minutes = time / 60;
+    uint32_t seconds = time % 60;
+    if (time < 3600)
+        snprintf(buff, buff_size, "%u:%02u", minutes, seconds);
+    else
+    {
+        uint32_t hours = time / 3600;
+        minutes = (time % 3600) / 60;
+        snprintf(buff, buff_size, "%u:%02u:%02u", hours, minutes, seconds);
+
+    }
+}
+BluetoothContext *bluetooth_context = bt_get_context();
 
 void loop()
 {
+    if (bt_get_connection_status())
+    {
+        if (!bt_is_init)
+        {
+            show_bt_connect_msgbox();
+            lv_timer_create(hide_bt_connect_msgbox, 8000, NULL);
+            lv_label_set_text(objects.bt_connected_label, "Bluetooth device connected.");
+            bt_is_init = true;
+        }
+    }
+    else
+    {
+        lv_label_set_text(objects.bt_connected_label, "Bluetooth device disconnected. Please connect your phone.");
+        bt_is_init = false;
+    }
+    // /if (bt_get_next_mc())
+    // {
+    lv_label_set_text(objects.song_title_label, bluetooth_context->current_metadata.title);
+    lv_label_set_text(objects.album_title_label, bluetooth_context->current_metadata.album);
+    lv_label_set_text(objects.artist_name_label, bluetooth_context->current_metadata.artist);
+    lv_slider_set_value(objects.music_progress_slider, ((float)bluetooth_context->current_metadata.current_play_pos / bluetooth_context->current_metadata.playing_time) * 100, LV_ANIM_ON);
 
+    char start_pos[20];
+    char end_pos[20];
+
+    format_time_display(start_pos, bluetooth_context->current_metadata.current_play_pos, 20);
+    format_time_display(end_pos, bluetooth_context->current_metadata.playing_time, 20);
+
+    lv_label_set_text(objects.starting_pos_label, start_pos);
+    lv_label_set_text(objects.end_pos_label, end_pos);
+
+    //  Serial.println((bluetooth_context->current_metadata.playing_time/bluetooth_context->current_metadata.playing_time) * 100);
+
+    // }
     lv_timer_handler(); /* let the GUI do its work */
     delay(5);
 }
