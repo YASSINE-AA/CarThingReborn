@@ -24,13 +24,13 @@
 
 
 static void data_received_callback() {
-  Serial.println("Data packet received");
+ // Serial.println("Data packet received");
 }
 
 void bt_connection_broadcast()
 {
     BluetoothA2DPSink a2dp_sink; 
-    a2dp_sink.set_on_data_received(data_received_callback);
+    //a2dp_sink.set_on_data_received(data_received_callback);
 
     a2dp_sink.start("Car Thingy.");
 }

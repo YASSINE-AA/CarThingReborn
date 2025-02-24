@@ -131,15 +131,6 @@ void create_screen_main() {
                             {
                                 lv_obj_t *parent_obj = obj;
                                 {
-                                    // album_art_image
-                                    lv_obj_t *obj = lv_img_create(parent_obj);
-                                    objects.album_art_image = obj;
-                                    lv_obj_set_pos(obj, -232, -233);
-                                    lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
-                                    lv_img_set_src(obj, &img_album_art);
-                                    lv_img_set_zoom(obj, 82);
-                                }
-                                {
                                     // song_title_label
                                     lv_obj_t *obj = lv_label_create(parent_obj);
                                     objects.song_title_label = obj;
@@ -201,11 +192,40 @@ void create_screen_main() {
 void tick_screen_main() {
 }
 
+void create_screen_bootup() {
+    lv_obj_t *obj = lv_obj_create(0);
+    objects.bootup = obj;
+    lv_obj_set_pos(obj, 0, 0);
+    lv_obj_set_size(obj, 480, 320);
+    {
+        lv_obj_t *parent_obj = obj;
+        {
+            lv_obj_t *obj = lv_spinner_create(parent_obj, 1000, 60);
+            lv_obj_set_pos(obj, 192, 115);
+            lv_obj_set_size(obj, 97, 91);
+        }
+        {
+            // bootup_label
+            lv_obj_t *obj = lv_label_create(parent_obj);
+            objects.bootup_label = obj;
+            lv_obj_set_pos(obj, 118, 216);
+            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+            lv_label_set_text(obj, "A prototype by Yassine Ahmed Ali");
+        }
+    }
+    
+    tick_screen_bootup();
+}
+
+void tick_screen_bootup() {
+}
+
 
 
 typedef void (*tick_screen_func_t)();
 tick_screen_func_t tick_screen_funcs[] = {
     tick_screen_main,
+    tick_screen_bootup,
 };
 void tick_screen(int screen_index) {
     tick_screen_funcs[screen_index]();
@@ -220,4 +240,5 @@ void create_screens() {
     lv_disp_set_theme(dispp, theme);
     
     create_screen_main();
+    create_screen_bootup();
 }

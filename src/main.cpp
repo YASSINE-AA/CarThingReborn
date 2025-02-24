@@ -76,8 +76,34 @@ void my_touchpad_read(lv_indev_drv_t *indev_drv, lv_indev_data_t *data)
     }
 }
 
+const char *boot_msgs[] = {
+    "Rolling boot dice... nat 1, retrying.     ",
+    "Please wait... or restart, your choice.   ",
+    "Optimizing... lying about progress.       ",
+    "Generating random errors...    ",
+    "Translating machine noises... beep boop.  ",
+    "Warming up electrons... almost warm!      ",
+    "Simulating hard work... looking busy.     ",
+    "Installing fun... encountered a problem.  ",
+    "Awaiting user patience... stuck at 0%.    ",
+    "Pretending to load... looking important.  "
+};
 
-
+static void switch_to_main(lv_timer_t *timer)
+{
+    lv_scr_load((lv_obj_t *)timer->user_data);
+}
+void show_boot_message(lv_timer_t *timer)
+{
+    int msg_index = lv_rand(0, sizeof(boot_msgs) / sizeof(boot_msgs[0]) - 1);
+    lv_label_set_text(objects.bootup_label, boot_msgs[msg_index]);
+}
+void setup_screens(void)
+{
+    lv_scr_load(objects.bootup);
+    lv_timer_create(show_boot_message, 1500, NULL);
+    lv_timer_create(switch_to_main, 8000, objects.main);
+}
 
 void setup()
 {
@@ -119,6 +145,7 @@ void setup()
 
     ui_init();
 
+    setup_screens();
 
     lv_tabview_set_act(objects.tabview, 0, LV_ANIM_ON);
 
