@@ -84,16 +84,4 @@
  lib/lvgl/src/extra/widgets/menu/../../../core/lv_obj_class.h \
  lib/lvgl/src/extra/widgets/menu/../../../core/lv_event.h \
  lib/lvgl/src/extra/widgets/menu/../../../core/lv_group.h \
- lib/lvgl/src/extra/widgets/menu/../../../core/../misc/lv_ll.h \
- lib/lvgl/src/extra/widgets/menu/../../layouts/flex/lv_flex.h \
- lib/lvgl/src/extra/widgets/menu/../../layouts/flex/../../../core/lv_obj.h \
- lib/lvgl/src/extra/widgets/menu/../../../widgets/lv_label.h \
- lib/lvgl/src/extra/widgets/menu/../../../widgets/../lv_conf_internal.h \
- lib/lvgl/src/extra/widgets/menu/../../../widgets/../core/lv_obj.h \
- lib/lvgl/src/extra/widgets/menu/../../../widgets/../font/lv_font.h \
- lib/lvgl/src/extra/widgets/menu/../../../widgets/../font/lv_symbol_def.h \
- lib/lvgl/src/extra/widgets/menu/../../../widgets/../misc/lv_txt.h \
- lib/lvgl/src/extra/widgets/menu/../../../widgets/../draw/lv_draw.h \
- lib/lvgl/src/extra/widgets/menu/../../../widgets/lv_btn.h \
- lib/lvgl/src/extra/widgets/menu/../../../widgets/lv_img.h \
- lib/lvgl/src/extra/widgets/menu/../../../widgets/../misc/lv_fs.h
+ lib/lvgl/src/extra/widgets/menu/../../../core/../misc/lv_ll.h

@@ -11,9 +11,18 @@ typedef struct _objects_t {
     lv_obj_t *main;
     lv_obj_t *tabview;
     lv_obj_t *dashboard;
+    lv_obj_t *weather_image;
     lv_obj_t *weather_label;
+    lv_obj_t *speed_meter;
     lv_obj_t *speed_label;
     lv_obj_t *playing;
+    lv_obj_t *album_art_image;
+    lv_obj_t *song_title_label;
+    lv_obj_t *album_title_label;
+    lv_obj_t *music_progress_slider;
+    lv_obj_t *music_back_btn;
+    lv_obj_t *music_pause_btn;
+    lv_obj_t *music_skip_button;
 } objects_t;
 
 extern objects_t objects;

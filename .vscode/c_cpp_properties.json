@@ -12,6 +12,8 @@
                 "${workspaceFolder}/lib",
                 "${workspaceFolder}/lib/TFT_eSPI",
                 "${workspaceFolder}/lib/lvgl",
+                "${workspaceFolder}/lib/A2DP/src",
+                "${workspaceFolder}/lib/AudioTools/src",
                 "${env:HOME}/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/newlib/platform_include",
                 "${env:HOME}/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include",
                 "${env:HOME}/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include/esp_additions/freertos",

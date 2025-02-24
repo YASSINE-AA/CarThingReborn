@@ -135,8 +135,6 @@
  lib/lvgl/src/extra/widgets/spinner/../../../../src/widgets/lv_roller.h \
  lib/lvgl/src/extra/widgets/spinner/../../../../src/widgets/lv_textarea.h \
  lib/lvgl/src/extra/widgets/spinner/../../../../src/widgets/lv_canvas.h \
- lib/lvgl/src/extra/widgets/spinner/../../../../src/widgets/../widgets/lv_img.h \
- lib/lvgl/src/extra/widgets/spinner/../../../../src/widgets/../draw/lv_draw_img.h \
  lib/lvgl/src/extra/widgets/spinner/../../../../src/widgets/lv_switch.h \
  lib/lvgl/src/extra/widgets/spinner/../../../../src/draw/lv_draw.h \
  lib/lvgl/src/extra/widgets/spinner/../../../../src/lv_api_map.h \

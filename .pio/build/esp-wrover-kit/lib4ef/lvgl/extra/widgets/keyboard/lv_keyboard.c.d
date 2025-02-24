@@ -86,11 +86,4 @@
  lib/lvgl/src/extra/widgets/keyboard/../../../widgets/../core/lv_obj_class.h \
  lib/lvgl/src/extra/widgets/keyboard/../../../widgets/../core/lv_event.h \
  lib/lvgl/src/extra/widgets/keyboard/../../../widgets/../core/lv_group.h \
- lib/lvgl/src/extra/widgets/keyboard/../../../widgets/../core/../misc/lv_ll.h \
- lib/lvgl/src/extra/widgets/keyboard/../../../widgets/lv_textarea.h \
- lib/lvgl/src/extra/widgets/keyboard/../../../widgets/lv_label.h \
- lib/lvgl/src/extra/widgets/keyboard/../../../widgets/../font/lv_font.h \
- lib/lvgl/src/extra/widgets/keyboard/../../../widgets/../font/lv_symbol_def.h \
- lib/lvgl/src/extra/widgets/keyboard/../../../widgets/../misc/lv_txt.h \
- lib/lvgl/src/extra/widgets/keyboard/../../../widgets/../draw/lv_draw.h \
- lib/lvgl/src/extra/widgets/keyboard/../../../misc/lv_assert.h
+ lib/lvgl/src/extra/widgets/keyboard/../../../widgets/../core/../misc/lv_ll.h

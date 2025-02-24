@@ -135,8 +135,6 @@
  lib/lvgl/src/extra/widgets/spinbox/../../../../src/widgets/lv_roller.h \
  lib/lvgl/src/extra/widgets/spinbox/../../../../src/widgets/lv_textarea.h \
  lib/lvgl/src/extra/widgets/spinbox/../../../../src/widgets/lv_canvas.h \
- lib/lvgl/src/extra/widgets/spinbox/../../../../src/widgets/../widgets/lv_img.h \
- lib/lvgl/src/extra/widgets/spinbox/../../../../src/widgets/../draw/lv_draw_img.h \
  lib/lvgl/src/extra/widgets/spinbox/../../../../src/widgets/lv_switch.h \
  lib/lvgl/src/extra/widgets/spinbox/../../../../src/draw/lv_draw.h \
  lib/lvgl/src/extra/widgets/spinbox/../../../../src/lv_api_map.h \
@@ -227,5 +225,4 @@
  lib/lvgl/src/extra/widgets/spinbox/../../../../src/extra/widgets/imgbtn/lv_imgbtn.h \
  lib/lvgl/src/extra/widgets/spinbox/../../../../src/extra/widgets/imgbtn/../../../lvgl.h \
  lib/lvgl/src/extra/widgets/spinbox/../../../../src/extra/widgets/span/lv_span.h \
- lib/lvgl/src/extra/widgets/spinbox/../../../../src/extra/widgets/span/../../../lvgl.h \
- lib/lvgl/src/extra/widgets/spinbox/../../../misc/lv_assert.h
+ lib/lvgl/src/extra/widgets/spinbox/../../../../src/extra/widgets/span/../../../lvgl.h

@@ -133,8 +133,6 @@
  lib/lvgl/src/extra/../../src/widgets/lv_roller.h \
  lib/lvgl/src/extra/../../src/widgets/lv_textarea.h \
  lib/lvgl/src/extra/../../src/widgets/lv_canvas.h \
- lib/lvgl/src/extra/../../src/widgets/../widgets/lv_img.h \
- lib/lvgl/src/extra/../../src/widgets/../draw/lv_draw_img.h \
  lib/lvgl/src/extra/../../src/widgets/lv_switch.h \
  lib/lvgl/src/extra/../../src/draw/lv_draw.h \
  lib/lvgl/src/extra/../../src/lv_api_map.h \

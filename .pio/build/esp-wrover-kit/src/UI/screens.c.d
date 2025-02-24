@@ -92,12 +92,10 @@
  lib/lvgl/src/widgets/lv_btnmatrix.h lib/lvgl/src/widgets/lv_dropdown.h \
  lib/lvgl/src/widgets/../widgets/lv_label.h \
  lib/lvgl/src/widgets/lv_roller.h lib/lvgl/src/widgets/lv_textarea.h \
- lib/lvgl/src/widgets/lv_canvas.h \
- lib/lvgl/src/widgets/../widgets/lv_img.h \
- lib/lvgl/src/widgets/../draw/lv_draw_img.h \
- lib/lvgl/src/widgets/lv_switch.h lib/lvgl/src/draw/lv_draw.h \
- lib/lvgl/src/lv_api_map.h lib/lvgl/src/../lvgl.h \
- lib/lvgl/src/extra/lv_extra.h lib/lvgl/src/extra/layouts/lv_layouts.h \
+ lib/lvgl/src/widgets/lv_canvas.h lib/lvgl/src/widgets/lv_switch.h \
+ lib/lvgl/src/draw/lv_draw.h lib/lvgl/src/lv_api_map.h \
+ lib/lvgl/src/../lvgl.h lib/lvgl/src/extra/lv_extra.h \
+ lib/lvgl/src/extra/layouts/lv_layouts.h \
  lib/lvgl/src/extra/layouts/flex/lv_flex.h \
  lib/lvgl/src/extra/layouts/flex/../../../core/lv_obj.h \
  lib/lvgl/src/extra/layouts/grid/lv_grid.h \
