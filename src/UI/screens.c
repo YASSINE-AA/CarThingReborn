@@ -249,9 +249,11 @@ void create_screen_main() {
             }
         }
         {
+            // volume_slider_panel
             lv_obj_t *obj = lv_obj_create(parent_obj);
-            lv_obj_set_pos(obj, 395, 70);
-            lv_obj_set_size(obj, 68, 229);
+            objects.volume_slider_panel = obj;
+            lv_obj_set_pos(obj, 101, 129);
+            lv_obj_set_size(obj, 279, 63);
             lv_obj_add_flag(obj, LV_OBJ_FLAG_HIDDEN);
             lv_obj_clear_flag(obj, LV_OBJ_FLAG_SCROLLABLE);
             {
@@ -260,10 +262,9 @@ void create_screen_main() {
                     // volume_slider
                     lv_obj_t *obj = lv_slider_create(parent_obj);
                     objects.volume_slider = obj;
-                    lv_obj_set_pos(obj, 11, 186);
-                    lv_obj_set_size(obj, 181, 12);
+                    lv_obj_set_pos(obj, -6, 8);
+                    lv_obj_set_size(obj, 255, 10);
                     lv_slider_set_value(obj, 25, LV_ANIM_OFF);
-                    lv_obj_set_style_transform_angle(obj, -900, LV_PART_MAIN | LV_STATE_DEFAULT);
                 }
             }
         }

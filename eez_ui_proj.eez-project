@@ -1211,7 +1211,6 @@
                 "conditionalStyles": [],
                 "childStyles": []
               },
-              "locked": true,
               "timeline": [],
               "eventHandlers": [],
               "leftUnit": "px",
@@ -1297,10 +1296,10 @@
             {
               "objID": "d8bed80a-df58-40d6-e20a-87b7ef540844",
               "type": "LVGLPanelWidget",
-              "left": 395,
-              "top": 70,
-              "width": 68,
-              "height": 229,
+              "left": 101,
+              "top": 129,
+              "width": 279,
+              "height": 63,
               "customInputs": [],
               "customOutputs": [],
               "style": {
@@ -1309,25 +1308,25 @@
                 "conditionalStyles": [],
                 "childStyles": []
               },
-              "locked": true,
               "timeline": [],
               "eventHandlers": [],
+              "identifier": "volume_slider_panel",
               "leftUnit": "px",
               "topUnit": "px",
               "widthUnit": "px",
               "heightUnit": "px",
               "children": [
                 {
-                  "objID": "ad9d59c5-41c7-4fbc-b016-0ccebdfde246",
+                  "objID": "bc07d5a2-d425-4918-b9d1-7704ad6865e9",
                   "type": "LVGLSliderWidget",
-                  "left": 11,
-                  "top": 186,
-                  "width": 181,
-                  "height": 12,
+                  "left": -6,
+                  "top": 8,
+                  "width": 255,
+                  "height": 10,
                   "customInputs": [],
                   "customOutputs": [],
                   "style": {
-                    "objID": "3ca75633-a687-4d9c-e3c3-e9e872486914",
+                    "objID": "e8f8ec00-2f0e-4cbe-e295-14b51721f460",
                     "useStyle": "default",
                     "conditionalStyles": [],
                     "childStyles": []
@@ -1352,14 +1351,7 @@
                   "disabledStateType": "literal",
                   "states": "",
                   "localStyles": {
-                    "objID": "19ae2d98-2cfe-4bdd-a3f5-92ffe138260f",
-                    "definition": {
-                      "MAIN": {
-                        "DEFAULT": {
-                          "transform_angle": -900
-                        }
-                      }
-                    }
+                    "objID": "00b6e47e-1ea3-4f59-823b-607b10b892d0"
                   },
                   "group": "",
                   "groupIndex": 0,

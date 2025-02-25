@@ -30,6 +30,7 @@ typedef struct _objects_t {
     lv_obj_t *bt_connection_msgbox;
     lv_obj_t *obj1;
     lv_obj_t *bt_connected_label;
+    lv_obj_t *volume_slider_panel;
     lv_obj_t *volume_slider;
     lv_obj_t *bootup_label;
 } objects_t;

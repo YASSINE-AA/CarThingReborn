@@ -22,6 +22,7 @@ typedef struct
     BluetoothSongMetadata current_metadata;
     char connected_device_name[CONNECTED_DEVICE_NAME_LENGTH];
     uint8_t current_volume;
+    bool is_volume_change;
 } BluetoothContext;
 
 void bt_connection_broadcast();

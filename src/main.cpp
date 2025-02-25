@@ -87,11 +87,14 @@ const char *boot_msgs[] = {
 static void switch_to_main(lv_timer_t *timer)
 {
     lv_scr_load((lv_obj_t *)timer->user_data);
+    lv_timer_del(timer);
 }
 void show_boot_message(lv_timer_t *timer)
 {
     int msg_index = lv_rand(0, sizeof(boot_msgs) / sizeof(boot_msgs[0]) - 1);
     lv_label_set_text(objects.bootup_label, boot_msgs[msg_index]);
+    lv_timer_del(timer);
+
 }
 void setup_screens(void)
 {
@@ -103,6 +106,8 @@ void setup_screens(void)
 void hide_bt_connect_msgbox(lv_timer_t *timer)
 {
     lv_obj_add_flag(objects.bt_connection_msgbox, LV_OBJ_FLAG_HIDDEN);
+    lv_timer_del(timer);
+
 }
 
 void show_bt_connect_msgbox()
@@ -198,6 +203,17 @@ void format_time_display(char *buff, uint32_t time, size_t buff_size)
 }
 BluetoothContext *bluetooth_context = bt_get_context();
 
+void show_volume_slider() {
+    lv_obj_clear_flag(objects.volume_slider_panel, LV_OBJ_FLAG_HIDDEN);
+}
+
+void hide_volume_slider(lv_timer_t *timer) 
+{
+    lv_obj_add_flag(objects.volume_slider_panel, LV_OBJ_FLAG_HIDDEN);
+    lv_timer_del(timer);
+}
+
+
 void loop()
 {
     if (bt_get_connection_status())
@@ -215,8 +231,16 @@ void loop()
         lv_label_set_text(objects.bt_connected_label, "Bluetooth device disconnected. Please connect your phone.");
         bt_is_init = false;
     }
-    // /if (bt_get_next_mc())
-    // {
+
+    if(bluetooth_context->is_volume_change) {
+        show_volume_slider();
+        lv_timer_create(hide_volume_slider, 8000, NULL);
+        lv_slider_set_value(objects.volume_slider, bluetooth_context->current_volume, LV_ANIM_ON);
+        bluetooth_context->is_volume_change = false;
+    }
+
+
+    // TODO: Add some function to test against and see if this needs to be updated.
     lv_label_set_text(objects.song_title_label, bluetooth_context->current_metadata.title);
     lv_label_set_text(objects.album_title_label, bluetooth_context->current_metadata.album);
     lv_label_set_text(objects.artist_name_label, bluetooth_context->current_metadata.artist);
@@ -230,10 +254,7 @@ void loop()
 
     lv_label_set_text(objects.starting_pos_label, start_pos);
     lv_label_set_text(objects.end_pos_label, end_pos);
-
-    //  Serial.println((bluetooth_context->current_metadata.playing_time/bluetooth_context->current_metadata.playing_time) * 100);
-
-    // }
+    
     lv_timer_handler(); /* let the GUI do its work */
     delay(5);
 }

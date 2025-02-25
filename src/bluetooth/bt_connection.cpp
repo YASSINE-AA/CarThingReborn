@@ -19,7 +19,7 @@
 AnalogAudioStream out;
 BluetoothA2DPSink a2dp_sink(out);
 
-BluetoothContext bt_ctx = {};
+static BluetoothContext bt_ctx = {0};
 
 static void data_received_callback()
 {
@@ -122,11 +122,14 @@ void avrc_rn_track_change_callback(uint8_t *id)
 void avrc_rn_volumechange_callback(int value)
 {
     const uint8_t max_value = 127;
-    bt_ctx.current_volume = (uint8_t) ((float)value / 127) * 100;
+    bt_ctx.current_volume = (uint8_t) (((float)value / max_value) * 100);
+   
+   bt_ctx.is_volume_change = true;
 }
 
 void bt_connection_broadcast()
 {
+    bt_ctx.is_volume_change = false;
     a2dp_sink.set_on_data_received(data_received_callback);
     a2dp_sink.set_stream_reader(read_data_stream);
     a2dp_sink.set_avrc_metadata_attribute_mask(ESP_AVRC_MD_ATTR_TITLE | ESP_AVRC_MD_ATTR_ARTIST | ESP_AVRC_MD_ATTR_ALBUM | ESP_AVRC_MD_ATTR_PLAYING_TIME);
