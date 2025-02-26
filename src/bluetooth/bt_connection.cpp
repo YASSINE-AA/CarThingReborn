@@ -32,11 +32,14 @@ void read_data_stream(const uint8_t *data, uint32_t length)
     uint32_t sample_count = length / 2;
 }
 
+
+
 void avrc_metadata_callback(uint8_t id, const uint8_t *text)
 {
     switch (id)
     {
     case ESP_AVRC_MD_ATTR_ARTIST:
+        
         strlcpy(bt_ctx.current_metadata.artist, reinterpret_cast<const char *>(text), METADATA_STRING_LENGTH);
         break;
 
@@ -135,7 +138,7 @@ void bt_set_volume()
 void bt_connection_broadcast()
 {
     bt_ctx.is_volume_change = false;
-    a2dp_sink.set_on_data_received(data_received_callback);
+   // a2dp_sink.set_on_data_received(data_received_callback);
     //2dp_sink.set_stream_reader(read_data_stream);
     a2dp_sink.set_avrc_metadata_attribute_mask(ESP_AVRC_MD_ATTR_TITLE | ESP_AVRC_MD_ATTR_ARTIST | ESP_AVRC_MD_ATTR_ALBUM | ESP_AVRC_MD_ATTR_PLAYING_TIME);
     a2dp_sink.set_avrc_metadata_callback(avrc_metadata_callback);

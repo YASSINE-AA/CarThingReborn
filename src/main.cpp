@@ -72,6 +72,51 @@ void my_touchpad_read(lv_indev_drv_t *indev_drv, lv_indev_data_t *data)
     }
 }
 
+
+// ============= Scrolling Logic ============== //
+#define SCROLL_DELAY 200
+#define MAX_SCROLL_POS 25
+
+typedef struct {
+    int scroll_pos;
+    unsigned long last_scroll_time;
+} ScrollState;
+
+ScrollState song_title_scroll = {0, 0};
+ScrollState album_title_scroll = {0, 0};
+ScrollState artist_name_scroll = {0, 0};
+
+void scroll_label_text(lv_obj_t *label, const char *text, ScrollState *state)
+{
+    if (millis() - state->last_scroll_time > SCROLL_DELAY)
+    {
+        state->last_scroll_time = millis();
+
+        char display_text[MAX_SCROLL_POS + 1];
+        int text_length = strlen(text);
+
+        if (text_length > MAX_SCROLL_POS)
+        {
+            for (int i = 0; i < MAX_SCROLL_POS; i++)
+            {
+                display_text[i] = text[(state->scroll_pos + i) % text_length];
+            }
+            display_text[MAX_SCROLL_POS] = '\0';
+
+            lv_label_set_text(label, display_text);
+
+            state->scroll_pos++;
+            if (state->scroll_pos >= text_length)
+            {
+                state->scroll_pos = 0;
+            }
+        }
+        else
+        {
+            lv_label_set_text(label, text);
+        }
+    }
+}
 const char *boot_msgs[] = {
     "Rolling boot dice... nat 1, retrying.     ",
     "Please wait... or restart, your choice.   ",
@@ -165,7 +210,7 @@ void setup()
 
     setup_screens();
 
-    lv_tabview_set_act(objects.tabview, 0, LV_ANIM_ON);
+    //lv_tabview_set_act(objects.tabview, 0, LV_ANIM_ON);
 
     /* Try an example. See all the examples
      * online: https://docs.lvgl.io/master/examples.html
@@ -211,9 +256,32 @@ void hide_volume_slider(lv_timer_t *timer)
 {
     lv_obj_add_flag(objects.volume_slider_panel, LV_OBJ_FLAG_HIDDEN);
     lv_timer_del(timer);
+}void update_metadata_display()
+{
+    BluetoothContext *bluetooth_context = bt_get_context();
+
+    // Scroll song title
+    scroll_label_text(objects.song_title_label, bluetooth_context->current_metadata.title, &song_title_scroll);
+
+    // Scroll album title
+    scroll_label_text(objects.album_title_label, bluetooth_context->current_metadata.album, &album_title_scroll);
+
+    // Scroll artist name
+    scroll_label_text(objects.artist_name_label, bluetooth_context->current_metadata.artist, &artist_name_scroll);
+
+    // Update progress slider
+    lv_slider_set_value(objects.music_progress_slider, ((float)bluetooth_context->current_metadata.current_play_pos / bluetooth_context->current_metadata.playing_time) * 100, LV_ANIM_ON);
+
+    // Update time display
+    char start_pos[20];
+    char end_pos[20];
+
+    format_time_display(start_pos, bluetooth_context->current_metadata.current_play_pos, 20);
+    format_time_display(end_pos, bluetooth_context->current_metadata.playing_time, 20);
+
+    lv_label_set_text(objects.starting_pos_label, start_pos);
+    lv_label_set_text(objects.end_pos_label, end_pos);
 }
-
-
 void loop()
 {
     if (bt_get_connection_status())
@@ -232,29 +300,17 @@ void loop()
         bt_is_init = false;
     }
 
-    if(bluetooth_context->is_volume_change) {
+    if (bluetooth_context->is_volume_change)
+    {
         show_volume_slider();
         lv_timer_create(hide_volume_slider, 8000, NULL);
         lv_slider_set_value(objects.volume_slider, bluetooth_context->current_volume, LV_ANIM_ON);
         bluetooth_context->is_volume_change = false;
     }
 
+    update_metadata_display();
 
-    // TODO: Add some function to test against and see if this needs to be updated.
-    lv_label_set_text(objects.song_title_label, bluetooth_context->current_metadata.title);
-    lv_label_set_text(objects.album_title_label, bluetooth_context->current_metadata.album);
-    lv_label_set_text(objects.artist_name_label, bluetooth_context->current_metadata.artist);
-    lv_slider_set_value(objects.music_progress_slider, ((float)bluetooth_context->current_metadata.current_play_pos / bluetooth_context->current_metadata.playing_time) * 100, LV_ANIM_ON);
-
-    char start_pos[20];
-    char end_pos[20];
-
-    format_time_display(start_pos, bluetooth_context->current_metadata.current_play_pos, 20);
-    format_time_display(end_pos, bluetooth_context->current_metadata.playing_time, 20);
-
-    lv_label_set_text(objects.starting_pos_label, start_pos);
-    lv_label_set_text(objects.end_pos_label, end_pos);
-    bt_set_volume();
+    // Handle LVGL tasks
     lv_timer_handler(); /* let the GUI do its work */
     delay(5);
 }

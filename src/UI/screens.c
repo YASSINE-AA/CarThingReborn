@@ -13,9 +13,6 @@
 objects_t objects;
 lv_obj_t *tick_value_change_obj;
 
-static lv_meter_scale_t * scale0;
-static lv_meter_indicator_t * indicator1;
-
 void create_screen_main() {
     lv_obj_t *obj = lv_obj_create(0);
     objects.main = obj;
@@ -36,98 +33,15 @@ void create_screen_main() {
                     // dashboard
                     lv_obj_t *obj = lv_tabview_add_tab(parent_obj, "Dashboard");
                     objects.dashboard = obj;
+                    lv_obj_clear_flag(obj, LV_OBJ_FLAG_SCROLLABLE);
                     lv_obj_set_style_bg_color(obj, lv_color_hex(0xff121212), LV_PART_MAIN | LV_STATE_DEFAULT);
                     {
                         lv_obj_t *parent_obj = obj;
                         {
                             lv_obj_t *obj = lv_obj_create(parent_obj);
-                            lv_obj_set_pos(obj, 1, 61);
-                            lv_obj_set_size(obj, 208, 167);
-                            {
-                                lv_obj_t *parent_obj = obj;
-                                {
-                                    // weather_image
-                                    lv_obj_t *obj = lv_img_create(parent_obj);
-                                    objects.weather_image = obj;
-                                    lv_obj_set_pos(obj, 42, 8);
-                                    lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
-                                    lv_img_set_src(obj, &img_weather);
-                                }
-                                {
-                                    // weather_label
-                                    lv_obj_t *obj = lv_label_create(parent_obj);
-                                    objects.weather_label = obj;
-                                    lv_obj_set_pos(obj, 18, 99);
-                                    lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
-                                    lv_label_set_text(obj, "Weather is Sunny!");
-                                }
-                            }
-                        }
-                        {
-                            lv_obj_t *obj = lv_obj_create(parent_obj);
-                            lv_obj_set_pos(obj, 235, -2);
-                            lv_obj_set_size(obj, 212, 229);
-                            lv_obj_clear_flag(obj, LV_OBJ_FLAG_SCROLLABLE|LV_OBJ_FLAG_SCROLL_CHAIN_HOR|LV_OBJ_FLAG_SCROLL_CHAIN_VER|LV_OBJ_FLAG_SCROLL_ELASTIC|LV_OBJ_FLAG_SCROLL_MOMENTUM|LV_OBJ_FLAG_SCROLL_WITH_ARROW);
-                            {
-                                lv_obj_t *parent_obj = obj;
-                                {
-                                    // speed_meter
-                                    lv_obj_t *obj = lv_meter_create(parent_obj);
-                                    objects.speed_meter = obj;
-                                    lv_obj_set_pos(obj, 11, -1);
-                                    lv_obj_set_size(obj, 155, 152);
-                                    {
-                                        lv_meter_scale_t *scale = lv_meter_add_scale(obj);
-                                        scale0 = scale;
-                                        lv_meter_set_scale_ticks(obj, scale, 41, 1, 5, lv_color_hex(0xffa0a0a0));
-                                        lv_meter_set_scale_major_ticks(obj, scale, 8, 3, 10, lv_color_hex(0xff000000), 10);
-                                        lv_meter_set_scale_range(obj, scale, 0, 200, 300, 120);
-                                        {
-                                            lv_meter_indicator_t *indicator = lv_meter_add_needle_line(obj, scale, 3, lv_color_hex(0xff0000ff), -28);
-                                            indicator1 = indicator;
-                                            lv_meter_set_indicator_value(obj, indicator, 30);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        {
-                            // speed_label
-                            lv_obj_t *obj = lv_label_create(parent_obj);
-                            objects.speed_label = obj;
-                            lv_obj_set_pos(obj, 288, 186);
-                            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
-                            lv_label_set_text(obj, "Speed: 0 km/h");
-                        }
-                        {
-                            lv_obj_t *obj = lv_obj_create(parent_obj);
-                            lv_obj_set_pos(obj, 1, -2);
-                            lv_obj_set_size(obj, 208, 54);
-                            {
-                                lv_obj_t *parent_obj = obj;
-                                {
-                                    lv_obj_t *obj = lv_label_create(parent_obj);
-                                    lv_obj_set_pos(obj, -1, 1);
-                                    lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
-                                    lv_label_set_text(obj, "Current time: 00:00:00s");
-                                }
-                            }
-                        }
-                    }
-                }
-                {
-                    // playing
-                    lv_obj_t *obj = lv_tabview_add_tab(parent_obj, "Playing");
-                    objects.playing = obj;
-                    lv_obj_add_state(obj, LV_STATE_FOCUSED|LV_STATE_PRESSED|LV_STATE_CHECKED);
-                    lv_obj_set_style_bg_color(obj, lv_color_hex(0xffffffff), LV_PART_MAIN | LV_STATE_DEFAULT);
-                    {
-                        lv_obj_t *parent_obj = obj;
-                        {
-                            lv_obj_t *obj = lv_obj_create(parent_obj);
                             objects.obj0 = obj;
-                            lv_obj_set_pos(obj, 1, -2);
-                            lv_obj_set_size(obj, 446, 230);
+                            lv_obj_set_pos(obj, 201, 57);
+                            lv_obj_set_size(obj, 247, 171);
                             lv_obj_clear_flag(obj, LV_OBJ_FLAG_SCROLLABLE);
                             lv_obj_set_style_text_color(obj, lv_color_hex(0xff212121), LV_PART_MAIN | LV_STATE_DEFAULT);
                             {
@@ -136,7 +50,7 @@ void create_screen_main() {
                                     // starting_pos_label
                                     lv_obj_t *obj = lv_label_create(parent_obj);
                                     objects.starting_pos_label = obj;
-                                    lv_obj_set_pos(obj, -1, 121);
+                                    lv_obj_set_pos(obj, 0, 111);
                                     lv_obj_set_size(obj, 75, LV_SIZE_CONTENT);
                                     lv_label_set_text(obj, "start");
                                     lv_obj_set_style_text_color(obj, lv_color_hex(0xff898989), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -145,7 +59,7 @@ void create_screen_main() {
                                     // end_pos_label
                                     lv_obj_t *obj = lv_label_create(parent_obj);
                                     objects.end_pos_label = obj;
-                                    lv_obj_set_pos(obj, 366, 121);
+                                    lv_obj_set_pos(obj, 170, 111);
                                     lv_obj_set_size(obj, 62, 16);
                                     lv_label_set_text(obj, "end");
                                     lv_obj_set_style_text_color(obj, lv_color_hex(0xff898989), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -154,8 +68,8 @@ void create_screen_main() {
                                     // song_title_label
                                     lv_obj_t *obj = lv_label_create(parent_obj);
                                     objects.song_title_label = obj;
-                                    lv_obj_set_pos(obj, -1, 37);
-                                    lv_obj_set_size(obj, 407, 16);
+                                    lv_obj_set_pos(obj, -1, 33);
+                                    lv_obj_set_size(obj, 198, 16);
                                     lv_label_set_text(obj, "Song: Darude Sandstorm");
                                 }
                                 {
@@ -170,58 +84,54 @@ void create_screen_main() {
                                     // music_progress_slider
                                     lv_obj_t *obj = lv_slider_create(parent_obj);
                                     objects.music_progress_slider = obj;
-                                    lv_obj_set_pos(obj, 5, 101);
-                                    lv_obj_set_size(obj, 401, 11);
-                                }
-                                {
-                                    // music_back_btn
-                                    lv_obj_t *obj = lv_imgbtn_create(parent_obj);
-                                    objects.music_back_btn = obj;
-                                    lv_obj_set_pos(obj, 83, 146);
-                                    lv_obj_set_size(obj, LV_SIZE_CONTENT, 32);
-                                    lv_imgbtn_set_src(obj, LV_IMGBTN_STATE_RELEASED, NULL, &img_back, NULL);
-                                }
-                                {
-                                    // music_pause_btn
-                                    lv_obj_t *obj = lv_imgbtn_create(parent_obj);
-                                    objects.music_pause_btn = obj;
-                                    lv_obj_set_pos(obj, 189, 146);
-                                    lv_obj_set_size(obj, LV_SIZE_CONTENT, 32);
-                                    lv_imgbtn_set_src(obj, LV_IMGBTN_STATE_RELEASED, NULL, &img_pause, NULL);
-                                }
-                                {
-                                    // music_skip_button
-                                    lv_obj_t *obj = lv_imgbtn_create(parent_obj);
-                                    objects.music_skip_button = obj;
-                                    lv_obj_set_pos(obj, 290, 146);
-                                    lv_obj_set_size(obj, LV_SIZE_CONTENT, 32);
-                                    lv_imgbtn_set_src(obj, LV_IMGBTN_STATE_RELEASED, NULL, &img_next, NULL);
+                                    lv_obj_set_pos(obj, 7, 90);
+                                    lv_obj_set_size(obj, 190, 11);
                                 }
                                 {
                                     // artist_name_label
                                     lv_obj_t *obj = lv_label_create(parent_obj);
                                     objects.artist_name_label = obj;
-                                    lv_obj_set_pos(obj, -1, 62);
+                                    lv_obj_set_pos(obj, -1, 58);
                                     lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
                                     lv_label_set_text(obj, "Artist: John Doe");
                                 }
                             }
                         }
                         {
-                            // bt_connection_msgbox
-                            lv_obj_t *obj = lv_msgbox_create(parent_obj, "", "", 0, true);
-                            objects.bt_connection_msgbox = obj;
-                            lv_obj_set_pos(obj, 126, 21);
-                            lv_obj_set_size(obj, 220, 145);
-                            lv_obj_add_flag(obj, LV_OBJ_FLAG_HIDDEN);
-                            lv_obj_set_style_align(obj, LV_ALIGN_DEFAULT, LV_PART_MAIN | LV_STATE_DEFAULT);
+                            lv_obj_t *obj = lv_obj_create(parent_obj);
+                            lv_obj_set_pos(obj, 1, 57);
+                            lv_obj_set_size(obj, 197, 171);
+                            {
+                                lv_obj_t *parent_obj = obj;
+                                {
+                                    // weather_image
+                                    lv_obj_t *obj = lv_img_create(parent_obj);
+                                    objects.weather_image = obj;
+                                    lv_obj_set_pos(obj, 40, 9);
+                                    lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+                                    lv_img_set_src(obj, &img_weather);
+                                }
+                                {
+                                    // weather_label
+                                    lv_obj_t *obj = lv_label_create(parent_obj);
+                                    objects.weather_label = obj;
+                                    lv_obj_set_pos(obj, 18, 103);
+                                    lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+                                    lv_label_set_text(obj, "Weather is Sunny!");
+                                }
+                            }
+                        }
+                        {
+                            lv_obj_t *obj = lv_obj_create(parent_obj);
+                            lv_obj_set_pos(obj, 1, -2);
+                            lv_obj_set_size(obj, 447, 54);
                             {
                                 lv_obj_t *parent_obj = obj;
                                 {
                                     lv_obj_t *obj = lv_label_create(parent_obj);
-                                    lv_obj_set_pos(obj, 138, 155);
+                                    lv_obj_set_pos(obj, -1, 1);
                                     lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
-                                    lv_label_set_text(obj, "Connected to Bluetooth");
+                                    lv_label_set_text(obj, "Current time: 00:00:00s");
                                 }
                             }
                         }
@@ -265,6 +175,24 @@ void create_screen_main() {
                     lv_obj_set_pos(obj, -6, 8);
                     lv_obj_set_size(obj, 255, 10);
                     lv_slider_set_value(obj, 25, LV_ANIM_OFF);
+                }
+            }
+        }
+        {
+            // bt_connection_msgbox
+            lv_obj_t *obj = lv_msgbox_create(parent_obj, "", "", 0, true);
+            objects.bt_connection_msgbox = obj;
+            lv_obj_set_pos(obj, 146, 108);
+            lv_obj_set_size(obj, 200, 130);
+            lv_obj_add_flag(obj, LV_OBJ_FLAG_HIDDEN);
+            lv_obj_set_style_align(obj, LV_ALIGN_DEFAULT, LV_PART_MAIN | LV_STATE_DEFAULT);
+            {
+                lv_obj_t *parent_obj = obj;
+                {
+                    lv_obj_t *obj = lv_label_create(parent_obj);
+                    lv_obj_set_pos(obj, 92, -4);
+                    lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+                    lv_label_set_text(obj, "Bluetooth Connected");
                 }
             }
         }
