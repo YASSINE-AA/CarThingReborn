@@ -114,7 +114,6 @@ void avrc_rn_track_change_callback(uint8_t *id)
     {
         Serial.printf("\tByte %d : 0x%x \n", i, id[i]);
     }
-    // An example of how to project the pointer value directly as a uint8_t
     uint8_t track_change_flag = *id;
     Serial.printf("\tFlag value: %d\n", track_change_flag);
 }
@@ -127,11 +126,17 @@ void avrc_rn_volumechange_callback(int value)
    bt_ctx.is_volume_change = true;
 }
 
+void bt_set_volume()
+{
+    a2dp_sink.set_volume(43);
+    a2dp_sink.fast_forward();
+}
+
 void bt_connection_broadcast()
 {
     bt_ctx.is_volume_change = false;
     a2dp_sink.set_on_data_received(data_received_callback);
-    a2dp_sink.set_stream_reader(read_data_stream);
+    //2dp_sink.set_stream_reader(read_data_stream);
     a2dp_sink.set_avrc_metadata_attribute_mask(ESP_AVRC_MD_ATTR_TITLE | ESP_AVRC_MD_ATTR_ARTIST | ESP_AVRC_MD_ATTR_ALBUM | ESP_AVRC_MD_ATTR_PLAYING_TIME);
     a2dp_sink.set_avrc_metadata_callback(avrc_metadata_callback);
     a2dp_sink.set_avrc_rn_playstatus_callback(avrc_rn_playstatus_callback);

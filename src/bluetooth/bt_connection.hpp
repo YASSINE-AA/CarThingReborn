@@ -2,6 +2,7 @@
 #define BT_CONNECTION_HPP
 #include <AudioTools.h>
 #include <BluetoothA2DPSink.h>
+#
 #include <cstddef>
 
 
@@ -32,5 +33,7 @@ BluetoothContext *bt_get_context();
 bool bt_get_next_mc();
 
 bool bt_get_connection_status();
+
+void bt_set_volume();
 
 #endif

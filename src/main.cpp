@@ -254,7 +254,7 @@ void loop()
 
     lv_label_set_text(objects.starting_pos_label, start_pos);
     lv_label_set_text(objects.end_pos_label, end_pos);
-    
+    bt_set_volume();
     lv_timer_handler(); /* let the GUI do its work */
     delay(5);
 }
