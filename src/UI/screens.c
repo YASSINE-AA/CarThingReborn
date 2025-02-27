@@ -164,6 +164,15 @@ void create_screen_main() {
                     lv_label_set_text(obj, "Disconnected. Please connect your phone.");
                     lv_obj_set_style_text_color(obj, lv_color_hex(0xffffffff), LV_PART_MAIN | LV_STATE_DEFAULT);
                 }
+                {
+                    // bluetooth_image
+                    lv_obj_t *obj = lv_img_create(parent_obj);
+                    objects.bluetooth_image = obj;
+                    lv_obj_set_pos(obj, 438, -13);
+                    lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+                    lv_img_set_src(obj, &img_bluetooth);
+                    lv_obj_add_flag(obj, LV_OBJ_FLAG_HIDDEN);
+                }
             }
         }
         {

@@ -34,6 +34,5 @@ bool bt_get_next_mc();
 
 bool bt_get_connection_status();
 
-void bt_set_volume();
-
+void bt_set_volume(uint8_t volume);
 #endif

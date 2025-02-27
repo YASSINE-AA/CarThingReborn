@@ -887,6 +887,53 @@
                   "textType": "literal",
                   "longMode": "WRAP",
                   "recolor": false
+                },
+                {
+                  "objID": "d521aeb6-924d-4475-ac36-2ccb2b6850c4",
+                  "type": "LVGLImageWidget",
+                  "left": 438,
+                  "top": -13,
+                  "width": 16,
+                  "height": 16,
+                  "customInputs": [],
+                  "customOutputs": [],
+                  "style": {
+                    "objID": "4dd34d7f-6160-48a8-f976-816777defb6c",
+                    "useStyle": "default",
+                    "conditionalStyles": [],
+                    "childStyles": []
+                  },
+                  "timeline": [],
+                  "eventHandlers": [],
+                  "identifier": "bluetooth_image",
+                  "leftUnit": "px",
+                  "topUnit": "px",
+                  "widthUnit": "content",
+                  "heightUnit": "content",
+                  "children": [],
+                  "widgetFlags": "ADV_HITTEST|CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
+                  "hiddenFlag": true,
+                  "hiddenFlagType": "literal",
+                  "clickableFlagType": "literal",
+                  "flagScrollbarMode": "",
+                  "flagScrollDirection": "",
+                  "scrollSnapX": "",
+                  "scrollSnapY": "",
+                  "checkedStateType": "literal",
+                  "disabledStateType": "literal",
+                  "states": "",
+                  "localStyles": {
+                    "objID": "e3c53ab3-0ca5-497f-b8d5-ddba598b3fb6"
+                  },
+                  "group": "",
+                  "groupIndex": 0,
+                  "image": "bluetooth",
+                  "setPivot": false,
+                  "pivotX": 0,
+                  "pivotY": 0,
+                  "zoom": 256,
+                  "angle": 0,
+                  "innerAlign": "CENTER"
                 }
               ],
               "widgetFlags": "CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
@@ -1331,6 +1378,13 @@
       "objID": "0e7f68a9-f022-4812-88e1-8b6c158b892e",
       "name": "back",
       "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAA7AAAAOwBeShxvQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAE7SURBVFiF7dc9SgNBGMbxnxYJCNrqASwtPIDewBt4BFtFvIGmsbOxVNAL6BGsvUBQ0CSChVYWgh9FsrjI7GZ3Z8M0eWCqfed5/rC778zLXH/qoochfiZriBN0InxXcYk39HGAxVBhLxf8fx03DF/HQ8BvP1Q8KgEYNQjfwKDArx/aUBSerTraxnuJ1/csAXbw0cSvDYBdfFbwmgnAHr4qhrcOcFgjuFWABZw2CG8FoIOrhuHRAEu4jQiPAljBXWR4FMB5C+FRAMMKtZUBgqfSFAXpm6oJwE2bAHlVfQXLEn+EJP4NMyVtRJmStuK8kh1GeSU9jjMlvZBkSnolyzTtUhr0K+vxzzUBYBMvBX5PWVG+FV+UmJU9K9I9tvAYeHYW2tA1HsPyw8TAeCqKGc3WcI3XCcyRcf+YC/wCVIriJM4J/SkAAAAASUVORK5CYII=",
+      "bpp": 32,
+      "alwaysBuild": false
+    },
+    {
+      "objID": "56d72c72-0009-4c42-cc76-5bc2601b5f39",
+      "name": "bluetooth",
+      "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAAdgAAAHYBTnsmCAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAHgSURBVDiNjZO7a1RBFIe/M/fm3g37iOxqNj6yWZEUacQIdmIhWAUrIZYWQuyC+ncIprJRSCdiaSHYWAh2xsYlCDGSxJAn65rcXdab7L3HYrLsuMHHDw7MHM53+M2cGaFPW5EO+ymzAlMqjH+PyBqhbTwWPJ97YyVZdOvF3dQjnVblGZDv5ZxiQQOPuWpZHnZzxoFvq/LChfulisQdHqzu6OPfHOy29LQkLAHZfsh14DrJZLhYKUrNAEjC/S68Hdv4m1SR5ICn7hFuAnRS2EvgyRp82DsOvt+ALw277qRMAhhVFeACwPwG1CI4k4HXu/C23oMX61DJw5tVu0+VUFWNWYEQCABulWG5BWttmMjB1SJ8i2C7Be/WIfTgIIHmoW2y8oOCwVEgMGBAAV/AAw5TSBSMQGovkFR7jF+FuA4xED7fhJEQBj34FEHBh0tDtuGV8lEjoBBYuHqCfSMiCnwFuHMWLg/B+k+4XrIBdtaTZVhuwI0xmzNCLCKpf+TkFTARGsgbmBmF0czxKVw751g3fOw2Z6epIyZlCcj1Q//1kIZzsiXCXexx/6nAY65SlBo4f6GUl5ciTAP7fwJF0MGAR+5nkv6izUhPDaTMAlMI440mWRHanmEBj5nzJ+WzW/8L5uug2Y1lND4AAAAASUVORK5CYII=",
       "bpp": 32,
       "alwaysBuild": false
     }

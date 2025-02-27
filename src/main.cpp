@@ -307,6 +307,7 @@ void loop()
             show_bt_connect_msgbox();
             lv_timer_create(hide_bt_connect_msgbox, 8000, NULL);
             lv_label_set_text(objects.bt_connected_label, "Bluetooth device connected.");
+            lv_obj_clear_flag(objects.bluetooth_image, LV_OBJ_FLAG_HIDDEN);
             bt_is_init = true;
         }
     }
@@ -314,6 +315,8 @@ void loop()
     {
         lv_label_set_text(objects.bt_connected_label, "Bluetooth device disconnected. Please connect your phone.");
         bt_is_init = false;
+        lv_obj_add_flag(objects.bluetooth_image, LV_OBJ_FLAG_HIDDEN);
+
     }
 
     uint16_t volume = volumeControl.getVolumePercentage();
@@ -325,6 +328,7 @@ void loop()
        // Serial.println(volume);
         char volume_label_text[20];
         snprintf(volume_label_text, 20, "Volume: %u%%", volume);
+        bt_set_volume(volume);
         lv_label_set_text(objects.volume_label, volume_label_text);
         lv_slider_set_value(objects.volume_slider, volume, LV_ANIM_ON);
         bluetooth_context->is_volume_change = false;

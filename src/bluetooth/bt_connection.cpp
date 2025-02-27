@@ -129,10 +129,12 @@ void avrc_rn_volumechange_callback(int value)
    bt_ctx.is_volume_change = true;
 }
 
-void bt_set_volume()
+void bt_set_volume(uint8_t volume)
 {
-    a2dp_sink.set_volume(43);
-    a2dp_sink.fast_forward();
+    const uint8_t max_value = 127;
+
+    a2dp_sink.set_volume(((float) volume/max_value)*max_value);
+    //a2dp_sink.fast_forward();
 }
 
 void bt_connection_broadcast()
