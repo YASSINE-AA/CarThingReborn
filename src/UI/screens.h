@@ -21,6 +21,7 @@ typedef struct _objects_t {
     lv_obj_t *artist_name_label;
     lv_obj_t *weather_image;
     lv_obj_t *weather_label;
+    lv_obj_t *volume_label;
     lv_obj_t *obj1;
     lv_obj_t *bt_connected_label;
     lv_obj_t *volume_slider_panel;

@@ -2,6 +2,7 @@
     "files.associations": {
         "cstddef": "cpp",
         "*.tcc": "cpp",
-        "fstream": "cpp"
+        "fstream": "cpp",
+        "cmath": "cpp"
     }
 }

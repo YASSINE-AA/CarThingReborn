@@ -133,6 +133,14 @@ void create_screen_main() {
                                     lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
                                     lv_label_set_text(obj, "Current time: 00:00:00s");
                                 }
+                                {
+                                    // volume_label
+                                    lv_obj_t *obj = lv_label_create(parent_obj);
+                                    objects.volume_label = obj;
+                                    lv_obj_set_pos(obj, 304, 1);
+                                    lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+                                    lv_label_set_text(obj, "Volume:");
+                                }
                             }
                         }
                     }

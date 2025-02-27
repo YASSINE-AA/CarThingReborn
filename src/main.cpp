@@ -5,8 +5,12 @@
 #include <TFT_eSPI.h>
 #include <UI/ui.h>
 
+
 // ============= BLUETOOTH ============== //
 #include <bluetooth/bt_connection.hpp>
+
+// ============== HW CONTROLS ============ //
+#include <controls/volume_control.hpp>
 
 /*To use the built-in examples and demos of LVGL uncomment the includes below respectively.
  *You also need to copy `lvgl/examples` to `lvgl/src/examples`. Similarly for the demos `lvgl/demos` to `lvgl/src/demos`.
@@ -16,6 +20,13 @@
 /*Change to your screen resolution*/
 static const uint16_t screenWidth = 480;
 static const uint16_t screenHeight = 320;
+const uint8_t PM_VCC_PIN = 18;
+const uint8_t PM_OUT_PIN = 34;
+const uint16_t PM_OUT_MAX_VALUE = 4095;
+
+PMVolumeControl volumeControl(PM_VCC_PIN, PM_OUT_PIN, PM_OUT_MAX_VALUE);
+
+bool is_volume_slider_shown = false;
 
 static lv_disp_draw_buf_t draw_buf;
 static lv_color_t buf[screenWidth * screenHeight / 10];
@@ -166,7 +177,10 @@ void setup()
     Serial.print("Free Heap Before Bluetooth: ");
     Serial.println(ESP.getFreeHeap());
 
+
+    
     bt_connection_broadcast(); // Initialize Bluetooth
+    volumeControl.init(); // Initialize Volume Knob
 
     // lv_label_set_text(objects.song_title_label, );
 
@@ -250,12 +264,14 @@ BluetoothContext *bluetooth_context = bt_get_context();
 
 void show_volume_slider() {
     lv_obj_clear_flag(objects.volume_slider_panel, LV_OBJ_FLAG_HIDDEN);
+    is_volume_slider_shown = true;
 }
 
-void hide_volume_slider(lv_timer_t *timer) 
+void hide_volume_slider() 
 {
     lv_obj_add_flag(objects.volume_slider_panel, LV_OBJ_FLAG_HIDDEN);
-    lv_timer_del(timer);
+    is_volume_slider_shown = false;
+
 }void update_metadata_display()
 {
     BluetoothContext *bluetooth_context = bt_get_context();
@@ -300,12 +316,20 @@ void loop()
         bt_is_init = false;
     }
 
-    if (bluetooth_context->is_volume_change)
+    uint16_t volume = volumeControl.getVolumePercentage();
+
+    if (volumeControl.isVolumeChanged())
     {
-        show_volume_slider();
-        lv_timer_create(hide_volume_slider, 8000, NULL);
-        lv_slider_set_value(objects.volume_slider, bluetooth_context->current_volume, LV_ANIM_ON);
+
+        if(!is_volume_slider_shown) show_volume_slider();
+       // Serial.println(volume);
+        char volume_label_text[20];
+        snprintf(volume_label_text, 20, "Volume: %u%%", volume);
+        lv_label_set_text(objects.volume_label, volume_label_text);
+        lv_slider_set_value(objects.volume_slider, volume, LV_ANIM_ON);
         bluetooth_context->is_volume_change = false;
+    } else {
+        hide_volume_slider();
     }
 
     update_metadata_display();
