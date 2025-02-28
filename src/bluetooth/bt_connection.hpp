@@ -1,16 +1,14 @@
 #ifndef BT_CONNECTION_HPP
 #define BT_CONNECTION_HPP
+
 #include <AudioTools.h>
 #include <BluetoothA2DPSink.h>
-#
 #include <cstddef>
-
 
 constexpr size_t METADATA_STRING_LENGTH = 64;
 constexpr size_t CONNECTED_DEVICE_NAME_LENGTH = 64;
 
-struct BluetoothSongMetadata
-{
+struct BluetoothSongMetadata {
     char title[METADATA_STRING_LENGTH];
     char album[METADATA_STRING_LENGTH];
     char artist[METADATA_STRING_LENGTH];
@@ -18,21 +16,31 @@ struct BluetoothSongMetadata
     uint32_t current_play_pos;
 };
 
-typedef struct
-{
+struct BluetoothContext {
     BluetoothSongMetadata current_metadata;
     char connected_device_name[CONNECTED_DEVICE_NAME_LENGTH];
     uint8_t current_volume;
     bool is_volume_change;
-} BluetoothContext;
+};
 
-void bt_connection_broadcast();
+class BluetoothConnection {
+public:
+    BluetoothConnection();
+    void init();
+    BluetoothContext* getContext();
+    bool isConnected();
+    void setVolume(uint8_t volume);
 
-BluetoothContext *bt_get_context();
+private:
+    AnalogAudioStream out;
+    BluetoothA2DPSink a2dp_sink;
+    static BluetoothContext bt_ctx;
 
-bool bt_get_next_mc();
+    static void avrc_metadata_callback(uint8_t id, const uint8_t *text);
+    static void avrc_rn_play_pos_callback(uint32_t play_pos);
+    static void avrc_rn_playstatus_callback(esp_avrc_playback_stat_t playback);
+    static void avrc_rn_track_change_callback(uint8_t *id);
+    static void avrc_rn_volumechange_callback(int value);
+};
 
-bool bt_get_connection_status();
-
-void bt_set_volume(uint8_t volume);
-#endif
+#endif // BT_CONNECTION_HPP

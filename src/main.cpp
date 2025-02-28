@@ -11,6 +11,7 @@
 
 // ============== HW CONTROLS ============ //
 #include <controls/volume_control.hpp>
+#include <controls/power_button.hpp>
 
 /*To use the built-in examples and demos of LVGL uncomment the includes below respectively.
  *You also need to copy `lvgl/examples` to `lvgl/src/examples`. Similarly for the demos `lvgl/demos` to `lvgl/src/demos`.
@@ -25,6 +26,8 @@ const uint8_t PM_OUT_PIN = 34;
 const uint16_t PM_OUT_MAX_VALUE = 4095;
 
 PMVolumeControl volumeControl(PM_VCC_PIN, PM_OUT_PIN, PM_OUT_MAX_VALUE);
+BluetoothConnection bluetoothConnection;
+PowerButton PowerButton;
 
 bool is_volume_slider_shown = false;
 
@@ -131,14 +134,7 @@ void scroll_label_text(lv_obj_t *label, const char *text, ScrollState *state)
 const char *boot_msgs[] = {
     "Rolling boot dice... nat 1, retrying.     ",
     "Please wait... or restart, your choice.   ",
-    "Optimizing... lying about progress.       ",
-    "Generating random errors...    ",
-    "Translating machine noises... beep boop.  ",
-    "Warming up electrons... almost warm!      ",
-    "Simulating hard work... looking busy.     ",
-    "Installing fun... encountered a problem.  ",
-    "Awaiting user patience... stuck at 0%.    ",
-    "Pretending to load... looking important.  "};
+    "Optimizing... lying about progress.       ",};
 
 static void switch_to_main(lv_timer_t *timer)
 {
@@ -149,8 +145,6 @@ void show_boot_message(lv_timer_t *timer)
 {
     int msg_index = lv_rand(0, sizeof(boot_msgs) / sizeof(boot_msgs[0]) - 1);
     lv_label_set_text(objects.bootup_label, boot_msgs[msg_index]);
-    lv_timer_del(timer);
-
 }
 void setup_screens(void)
 {
@@ -179,8 +173,9 @@ void setup()
 
 
     
-    bt_connection_broadcast(); // Initialize Bluetooth
+    bluetoothConnection.init(); // Initialize Bluetooth
     volumeControl.init(); // Initialize Volume Knob
+    PowerButton.init();
 
     // lv_label_set_text(objects.song_title_label, );
 
@@ -219,7 +214,9 @@ void setup()
     indev_drv.type = LV_INDEV_TYPE_POINTER;
     indev_drv.read_cb = my_touchpad_read;
     lv_indev_drv_register(&indev_drv);
-
+    lv_theme_t * th = lv_theme_default_init(lv_disp_get_default(), lv_color_hex(0xff0000), lv_color_hex(0x00ff00), true, LV_FONT_DEFAULT);
+    lv_disp_set_theme(lv_disp_get_default(), th);
+  
     ui_init();
 
     setup_screens();
@@ -260,7 +257,7 @@ void format_time_display(char *buff, uint32_t time, size_t buff_size)
 
     }
 }
-BluetoothContext *bluetooth_context = bt_get_context();
+BluetoothContext *bluetooth_context = bluetoothConnection.getContext();
 
 void show_volume_slider() {
     lv_obj_clear_flag(objects.volume_slider_panel, LV_OBJ_FLAG_HIDDEN);
@@ -274,7 +271,6 @@ void hide_volume_slider()
 
 }void update_metadata_display()
 {
-    BluetoothContext *bluetooth_context = bt_get_context();
 
     // Scroll song title
     scroll_label_text(objects.song_title_label, bluetooth_context->current_metadata.title, &song_title_scroll);
@@ -300,7 +296,7 @@ void hide_volume_slider()
 }
 void loop()
 {
-    if (bt_get_connection_status())
+    if (bluetoothConnection.isConnected())
     {
         if (!bt_is_init)
         {
@@ -308,6 +304,10 @@ void loop()
             lv_timer_create(hide_bt_connect_msgbox, 8000, NULL);
             lv_label_set_text(objects.bt_connected_label, "Bluetooth device connected.");
             lv_obj_clear_flag(objects.bluetooth_image, LV_OBJ_FLAG_HIDDEN);
+            lv_obj_add_flag(objects.music_image, LV_OBJ_FLAG_HIDDEN);
+            lv_obj_clear_flag(objects.album_title_label, LV_OBJ_FLAG_HIDDEN);
+            lv_obj_clear_flag(objects.artist_name_label, LV_OBJ_FLAG_HIDDEN);
+            lv_obj_clear_flag(objects.song_title_label, LV_OBJ_FLAG_HIDDEN);
             bt_is_init = true;
         }
     }
@@ -316,6 +316,10 @@ void loop()
         lv_label_set_text(objects.bt_connected_label, "Bluetooth device disconnected. Please connect your phone.");
         bt_is_init = false;
         lv_obj_add_flag(objects.bluetooth_image, LV_OBJ_FLAG_HIDDEN);
+        lv_obj_clear_flag(objects.music_image, LV_OBJ_FLAG_HIDDEN);
+        lv_obj_add_flag(objects.album_title_label, LV_OBJ_FLAG_HIDDEN);
+        lv_obj_add_flag(objects.artist_name_label, LV_OBJ_FLAG_HIDDEN);
+        lv_obj_add_flag(objects.song_title_label, LV_OBJ_FLAG_HIDDEN);
 
     }
 
@@ -328,7 +332,7 @@ void loop()
        // Serial.println(volume);
         char volume_label_text[20];
         snprintf(volume_label_text, 20, "Volume: %u%%", volume);
-        bt_set_volume(volume);
+        bluetoothConnection.setVolume(volume);
         lv_label_set_text(objects.volume_label, volume_label_text);
         lv_slider_set_value(objects.volume_slider, volume, LV_ANIM_ON);
         bluetooth_context->is_volume_change = false;
@@ -337,6 +341,8 @@ void loop()
     }
 
     update_metadata_display();
+
+    PowerButton.getState();
 
     // Handle LVGL tasks
     lv_timer_handler(); /* let the GUI do its work */

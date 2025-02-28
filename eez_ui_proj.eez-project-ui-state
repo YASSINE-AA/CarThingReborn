@@ -1,6 +1,7 @@
 {
   "navigation": {
     "selectedUserPageObject": "[eez_ui_proj.eez-project]:/userPages/0",
+    "selectedBitmapObject": "[eez_ui_proj.eez-project]:/bitmaps/5",
     "subnavigationSelectedItems": {}
   },
   "layoutModel": {
@@ -21,6 +22,7 @@
           },
           {
             "type": "border",
+            "selected": 2,
             "size": 240,
             "location": "right",
             "children": [
@@ -186,7 +188,7 @@
             {
               "type": "tabset",
               "id": "EDITORS",
-              "weight": 52.30769230769231,
+              "weight": 61.78846153846154,
               "enableDeleteWhenEmpty": false,
               "enableClose": false,
               "children": [
@@ -207,7 +209,7 @@
             {
               "type": "row",
               "id": "#80c17deb-1415-4cb6-af28-0f23fc4e82f4",
-              "weight": 32.69230769230769,
+              "weight": 23.21153846153846,
               "children": [
                 {
                   "type": "tabset",
@@ -531,7 +533,8 @@
                       "component": "bitmaps",
                       "enableClose": false
                     }
-                  ]
+                  ],
+                  "active": true
                 },
                 {
                   "type": "tabset",
@@ -977,7 +980,8 @@
                 "3": {},
                 "4": {}
               },
-              "1": {}
+              "1": {},
+              "2": {}
             }
           },
           "1": {
@@ -991,10 +995,10 @@
       },
       "transform": {
         "translate": {
-          "x": -240,
-          "y": -160
+          "x": -259.6938095238096,
+          "y": -184.4347619047619
         },
-        "scale": 1
+        "scale": 1.1
       },
       "timeline": {
         "isEditorActive": false,
@@ -1023,6 +1027,6 @@
   ],
   "showInactiveFlowsInDebugger": true,
   "globalFlowZoom": true,
-  "flowZoom": 1,
+  "flowZoom": 1.1,
   "implementationLanguage": "C"
 }

@@ -19,6 +19,7 @@ typedef struct _objects_t {
     lv_obj_t *album_title_label;
     lv_obj_t *music_progress_slider;
     lv_obj_t *artist_name_label;
+    lv_obj_t *music_image;
     lv_obj_t *weather_image;
     lv_obj_t *weather_label;
     lv_obj_t *volume_label;
@@ -28,6 +29,7 @@ typedef struct _objects_t {
     lv_obj_t *volume_slider_panel;
     lv_obj_t *volume_slider;
     lv_obj_t *bt_connection_msgbox;
+    lv_obj_t *obj2;
     lv_obj_t *bootup_label;
 } objects_t;
 

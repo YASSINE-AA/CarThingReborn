@@ -225,14 +225,4 @@
  lib/lvgl/src/extra/themes/mono/../../../../src/extra/widgets/imgbtn/lv_imgbtn.h \
  lib/lvgl/src/extra/themes/mono/../../../../src/extra/widgets/imgbtn/../../../lvgl.h \
  lib/lvgl/src/extra/themes/mono/../../../../src/extra/widgets/span/lv_span.h \
- lib/lvgl/src/extra/themes/mono/../../../../src/extra/widgets/span/../../../lvgl.h \
- lib/lvgl/src/extra/themes/mono/lv_theme_mono.h \
- lib/lvgl/src/extra/themes/mono/../../../misc/lv_gc.h \
- lib/lvgl/src/extra/themes/mono/../../../misc/../lv_conf_internal.h \
- lib/lvgl/src/extra/themes/mono/../../../misc/lv_mem.h \
- lib/lvgl/src/extra/themes/mono/../../../misc/lv_ll.h \
- lib/lvgl/src/extra/themes/mono/../../../misc/lv_timer.h \
- lib/lvgl/src/extra/themes/mono/../../../misc/lv_types.h \
- lib/lvgl/src/extra/themes/mono/../../../misc/../draw/lv_img_cache.h \
- lib/lvgl/src/extra/themes/mono/../../../misc/../draw/lv_draw_mask.h \
- lib/lvgl/src/extra/themes/mono/../../../misc/../core/lv_obj_pos.h
+ lib/lvgl/src/extra/themes/mono/../../../../src/extra/widgets/span/../../../lvgl.h

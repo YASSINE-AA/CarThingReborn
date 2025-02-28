@@ -71,6 +71,8 @@ void create_screen_main() {
                                     lv_obj_set_pos(obj, -1, 33);
                                     lv_obj_set_size(obj, 198, 16);
                                     lv_label_set_text(obj, "Song: Darude Sandstorm");
+                                    lv_obj_add_flag(obj, LV_OBJ_FLAG_HIDDEN);
+                                    lv_obj_set_style_text_color(obj, lv_color_hex(0xffffffff), LV_PART_MAIN | LV_STATE_DEFAULT);
                                 }
                                 {
                                     // album_title_label
@@ -79,6 +81,8 @@ void create_screen_main() {
                                     lv_obj_set_pos(obj, -1, 9);
                                     lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
                                     lv_label_set_text(obj, "Album: John Doe");
+                                    lv_obj_add_flag(obj, LV_OBJ_FLAG_HIDDEN);
+                                    lv_obj_set_style_text_color(obj, lv_color_hex(0xffffffff), LV_PART_MAIN | LV_STATE_DEFAULT);
                                 }
                                 {
                                     // music_progress_slider
@@ -94,6 +98,16 @@ void create_screen_main() {
                                     lv_obj_set_pos(obj, -1, 58);
                                     lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
                                     lv_label_set_text(obj, "Artist: John Doe");
+                                    lv_obj_add_flag(obj, LV_OBJ_FLAG_HIDDEN);
+                                    lv_obj_set_style_text_color(obj, lv_color_hex(0xffffffff), LV_PART_MAIN | LV_STATE_DEFAULT);
+                                }
+                                {
+                                    // music_image
+                                    lv_obj_t *obj = lv_img_create(parent_obj);
+                                    objects.music_image = obj;
+                                    lv_obj_set_pos(obj, 70, 4);
+                                    lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+                                    lv_img_set_src(obj, &img_music);
                                 }
                             }
                         }
@@ -107,7 +121,7 @@ void create_screen_main() {
                                     // weather_image
                                     lv_obj_t *obj = lv_img_create(parent_obj);
                                     objects.weather_image = obj;
-                                    lv_obj_set_pos(obj, 40, 9);
+                                    lv_obj_set_pos(obj, 49, 14);
                                     lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
                                     lv_img_set_src(obj, &img_weather);
                                 }
@@ -207,9 +221,11 @@ void create_screen_main() {
                 lv_obj_t *parent_obj = obj;
                 {
                     lv_obj_t *obj = lv_label_create(parent_obj);
+                    objects.obj2 = obj;
                     lv_obj_set_pos(obj, 92, -4);
                     lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
                     lv_label_set_text(obj, "Bluetooth Connected");
+                    lv_obj_set_style_text_color(obj, lv_color_hex(0xffffffff), LV_PART_MAIN | LV_STATE_DEFAULT);
                 }
             }
         }
@@ -230,16 +246,23 @@ void create_screen_bootup() {
         lv_obj_t *parent_obj = obj;
         {
             lv_obj_t *obj = lv_spinner_create(parent_obj, 1000, 60);
-            lv_obj_set_pos(obj, 192, 115);
-            lv_obj_set_size(obj, 97, 91);
+            lv_obj_set_pos(obj, 141, 43);
+            lv_obj_set_size(obj, 331, 199);
         }
         {
             // bootup_label
             lv_obj_t *obj = lv_label_create(parent_obj);
             objects.bootup_label = obj;
-            lv_obj_set_pos(obj, 118, 216);
+            lv_obj_set_pos(obj, 118, 269);
             lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
             lv_label_set_text(obj, "A prototype by Yassine Ahmed Ali");
+        }
+        {
+            lv_obj_t *obj = lv_img_create(parent_obj);
+            lv_obj_set_pos(obj, 112, 14);
+            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+            lv_img_set_src(obj, &img_vw);
+            lv_img_set_zoom(obj, 170);
         }
     }
     
@@ -265,7 +288,7 @@ void tick_screen_by_id(enum ScreensEnum screenId) {
 
 void create_screens() {
     lv_disp_t *dispp = lv_disp_get_default();
-    lv_theme_t *theme = lv_theme_default_init(dispp, lv_palette_main(LV_PALETTE_BLUE), lv_palette_main(LV_PALETTE_RED), false, LV_FONT_DEFAULT);
+    lv_theme_t *theme = lv_theme_default_init(dispp, lv_palette_main(LV_PALETTE_BLUE), lv_palette_main(LV_PALETTE_RED), true, LV_FONT_DEFAULT);
     lv_disp_set_theme(dispp, theme);
     
     create_screen_main();

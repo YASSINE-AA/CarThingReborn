@@ -675,4 +675,4 @@
  /home/yassine-ahmed-ali/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-log.h \
  lib/A2DP/src/BluetoothA2DPOutput.h \
  /home/yassine-ahmed-ali/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_ringbuf/include/freertos/ringbuf.h \
- src/controls/volume_control.hpp
+ src/controls/volume_control.hpp src/controls/power_button.hpp
